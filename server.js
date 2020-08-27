@@ -3,12 +3,15 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/swag-shop');
+var cors = require('./node_modules/cors/lib/index')
 var Product = require('./model/product');
 var WishList = require('./model/wishlist');
 const product = require('./model/product');
 const wishlist = require('./model/wishlist');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 app.post('/product', function (req,res) {
     var product = new Product();
@@ -82,6 +85,6 @@ app.put('/wishlist/product/add', function (req, res) {
     });
 });
 
-app.listen(3000, function () {
-    console.log('Swag Shop Api on Port 3000...');
+app.listen(3004, function () {
+    console.log('Swag Shop Api on Port 3004...');
 });
